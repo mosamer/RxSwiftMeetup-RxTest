@@ -12,6 +12,8 @@ target 'RxSwiftMeetup' do
   target 'RxSwiftMeetupTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'RxTestExt'
 
   end
+  
 end
