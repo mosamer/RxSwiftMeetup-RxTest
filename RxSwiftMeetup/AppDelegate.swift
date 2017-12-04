@@ -15,7 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        guard let zenVC = window?.rootViewController as? ZenViewController else {
+            fatalError()
+        }
+
+        let apiClient = APIClient(session: URLSession.shared)
+        let zenVM = ZenViewModel(api: apiClient)
+        zenVC.viewModel = zenVM
+        
         return true
     }
 
