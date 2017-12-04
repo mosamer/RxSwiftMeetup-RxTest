@@ -26,6 +26,15 @@ class APIClient: ZenAPI {
     }
 
     func zen() -> Observable<String> {
-        return Observable.empty()
+        return Observable
+            .deferred {
+                Observable.just("https://api.github.com/zen")
+            }
+            .flatMap {[unowned self] url -> Observable<Data> in
+                return self.session.request(url: URL(string: url)!)
+            }
+            .map {_ in
+                ""
+        }
     }
 }
