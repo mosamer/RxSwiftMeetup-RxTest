@@ -25,7 +25,9 @@ class ZenViewModel: ZenViewModelType {
     var isLoading: Driver<Bool> {
         return zenRequest.executing.asDriver(onErrorJustReturn: false)
     }
-    var canLoad: Driver<Bool> { return Driver.empty() }
+    var canLoad: Driver<Bool> {
+        return zenRequest.enabled.asDriver(onErrorJustReturn: false)
+    }
     var load: AnyObserver<Void> {
         return zenRequest.inputs.asObserver()
     }

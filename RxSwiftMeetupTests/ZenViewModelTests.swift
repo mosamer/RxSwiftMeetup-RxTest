@@ -46,6 +46,19 @@ class ZenViewModelTests: XCTestCase {
         }
     }
     // MARK: can load
+    func testDisableLoadWhileRequest() {
+        mockAPI.zenEvents = [next(10, "Hello, world!"), completed(10)]
+        scheduler.bind([next(5, ())], to: sut.load)
+        SharingScheduler.mock(scheduler: scheduler) {
+            let enabled = scheduler.record(source: sut.canLoad)
+            scheduler.start()
+            XCTAssertEqual(enabled.events, [
+                next(0, true),
+                next(5, false),
+                next(15, true),
+                ])
+        }
+    }
     // MARK: load request
     func testCallAPIWhenRequested() {
         scheduler.bind([next(10, ())], to: sut.load)
