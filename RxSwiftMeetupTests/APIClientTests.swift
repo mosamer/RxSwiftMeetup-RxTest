@@ -36,6 +36,25 @@ class APIClientTests: XCTestCase {
         XCTAssertEqual(mockSession.requestedURL, "https://api.github.com/zen")
     }
 
+    func testParseResponse() {
+        mockSession.requestEvents = [
+            next(10, "Hello, world!".data(using: .utf8)!),
+            completed(10),
+        ]
+        let zen = scheduler.record(source: sut.zen())
+        scheduler.start()
+        assert(zen) == "Hello, world!"
+    }
+
+    func testCompleteAfterParsing() {
+        mockSession.requestEvents = [
+            next(10, "Hello, world!".data(using: .utf8)!),
+            completed(10),
+        ]
+        let zen = scheduler.record(source: sut.zen())
+        scheduler.start()
+        assert(zen).complete(at: 10)
+    }
     class MockURLSession: URLSessionType {
         private let scheduler: TestScheduler
         init(_ scheduler: TestScheduler) {

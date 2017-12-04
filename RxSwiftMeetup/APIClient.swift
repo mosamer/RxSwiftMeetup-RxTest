@@ -33,8 +33,8 @@ class APIClient: ZenAPI {
             .flatMap {[unowned self] url -> Observable<Data> in
                 return self.session.request(url: URL(string: url)!)
             }
-            .map {_ in
-                ""
+            .map {
+                String(data: $0, encoding: .utf8)!
         }
     }
 }
