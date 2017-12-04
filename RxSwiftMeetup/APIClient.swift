@@ -20,6 +20,12 @@ extension URLSession: URLSessionType {
 }
 
 class APIClient: ZenAPI {
+    enum Error: Swift.Error {
+        case noInternet
+        case requestTimedOut
+        case unknown
+    }
+
     private let session: URLSessionType
     init(session: URLSessionType) {
         self.session = session
@@ -35,6 +41,18 @@ class APIClient: ZenAPI {
             }
             .map {
                 String(data: $0, encoding: .utf8)!
+        }
+            .catchError {
+                let error = $0 as NSError
+                guard error.domain == NSURLErrorDomain else { throw Error.unknown }
+                switch error.code {
+                case NSURLErrorTimedOut:
+                    throw Error.requestTimedOut
+                case NSURLErrorNotConnectedToInternet:
+                    throw Error.noInternet
+                default:
+                    throw Error.unknown
+                }
         }
     }
 }

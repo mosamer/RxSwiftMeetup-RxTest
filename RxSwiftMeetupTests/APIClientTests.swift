@@ -35,7 +35,7 @@ class APIClientTests: XCTestCase {
         scheduler.start()
         XCTAssertEqual(mockSession.requestedURL, "https://api.github.com/zen")
     }
-
+    // MARK: Parsing response
     func testParseResponse() {
         mockSession.requestEvents = [
             next(10, "Hello, world!".data(using: .utf8)!),
@@ -55,6 +55,25 @@ class APIClientTests: XCTestCase {
         scheduler.start()
         assert(zen).complete(at: 10)
     }
+    // MARK: Handling Error
+    func testInterceptingNoInternetError() {
+        mockSession.requestEvents = [error(10, NSError(domain: NSURLErrorDomain, code: NSURLErrorNotConnectedToInternet, userInfo: nil))]
+        let zen = scheduler.record(source: sut.zen())
+        scheduler.start()
+        assert(zen).error(with: APIClient.Error.noInternet)
+    }
+    func testInterceptingRequestTimedOutError() {
+        mockSession.requestEvents = [error(10, NSError(domain: NSURLErrorDomain, code: NSURLErrorTimedOut, userInfo: nil))]
+        let zen = scheduler.record(source: sut.zen())
+        scheduler.start()
+        assert(zen).error(with: APIClient.Error.requestTimedOut)
+    }
+    func testHandleAllOtherErrors() {
+        mockSession.requestEvents = [error(10, TestError)]
+        let zen = scheduler.record(source: sut.zen())
+        scheduler.start()
+        assert(zen).error(with: APIClient.Error.unknown)
+    }
     class MockURLSession: URLSessionType {
         private let scheduler: TestScheduler
         init(_ scheduler: TestScheduler) {
@@ -69,3 +88,6 @@ class APIClientTests: XCTestCase {
         }
     }
 }
+
+let TestError = "random error"
+extension String: Swift.Error {}
