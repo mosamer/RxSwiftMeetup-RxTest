@@ -17,6 +17,7 @@
 		CE962BFD1FD54177006188D2 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE962BFC1FD54177006188D2 /* APIClient.swift */; };
 		CE962BFF1FD541AD006188D2 /* ZenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE962BFE1FD541AD006188D2 /* ZenViewController.swift */; };
 		CE962C011FD54A63006188D2 /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE962C001FD54A63006188D2 /* APIClientTests.swift */; };
+		CE962C031FD5527C006188D2 /* ZenViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE962C021FD5527C006188D2 /* ZenViewModelTests.swift */; };
 		F024570D9D0F803CC5B5917A /* Pods_RxSwiftMeetupTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C53B7C55966BE48BEE8DEE /* Pods_RxSwiftMeetupTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		CE962BFC1FD54177006188D2 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		CE962BFE1FD541AD006188D2 /* ZenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZenViewController.swift; sourceTree = "<group>"; };
 		CE962C001FD54A63006188D2 /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
+		CE962C021FD5527C006188D2 /* ZenViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenViewModelTests.swift; sourceTree = "<group>"; };
 		E1B9C6B3A456D79CB5BD64FF /* Pods-RxSwiftMeetup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwiftMeetup.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxSwiftMeetup/Pods-RxSwiftMeetup.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +135,7 @@
 				CE962BEF1FD53E6F006188D2 /* RxSwiftMeetupTests.swift */,
 				CE962BF11FD53E6F006188D2 /* Info.plist */,
 				CE962C001FD54A63006188D2 /* APIClientTests.swift */,
+				CE962C021FD5527C006188D2 /* ZenViewModelTests.swift */,
 			);
 			path = RxSwiftMeetupTests;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 			files = (
 				CE962BF01FD53E6F006188D2 /* RxSwiftMeetupTests.swift in Sources */,
 				CE962C011FD54A63006188D2 /* APIClientTests.swift in Sources */,
+				CE962C031FD5527C006188D2 /* ZenViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -24,7 +24,9 @@ class ZenViewModel: ZenViewModelType {
 
     var isLoading: Driver<Bool> { return Driver.empty() }
     var canLoad: Driver<Bool> { return Driver.empty() }
-    var load: AnyObserver<Void> { return AnyObserver { _ in } }
+    var load: AnyObserver<Void> {
+        return zenRequest.inputs.asObserver()
+    }
     var content: Driver<String> { return Driver.empty() }
     var color:Driver<UIColor> { return Driver.empty() }
 }
