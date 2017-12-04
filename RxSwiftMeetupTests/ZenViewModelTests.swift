@@ -40,7 +40,25 @@ class ZenViewModelTests: XCTestCase {
         XCTAssertEqual(mockAPI.zenCalled, 1)
     }
     // MARK: content
+    func testShowResultsAsContent() {
+        mockAPI.zenEvents = [next(10, "Hello, world!"), completed(10)]
+        scheduler.bind([next(0, ())], to: sut.load)
+        SharingScheduler.mock(scheduler: scheduler) {
+            let content = scheduler.record(source: sut.content)
+            scheduler.start()
+            assert(content) == "Hello, world!"
+        }
+    }
     // MARK: color
+    func testShowResultsAsBlack() {
+        mockAPI.zenEvents = [next(10, "Hello, world!"), completed(10)]
+        scheduler.bind([next(0, ())], to: sut.load)
+        SharingScheduler.mock(scheduler: scheduler) {
+            let color = scheduler.record(source: sut.color)
+            scheduler.start()
+            assert(color) == .black
+        }
+    }
     // MARK:- Mock API
     class MockAPIClient: ZenAPI {
         private let scheduler: TestScheduler

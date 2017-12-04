@@ -27,6 +27,10 @@ class ZenViewModel: ZenViewModelType {
     var load: AnyObserver<Void> {
         return zenRequest.inputs.asObserver()
     }
-    var content: Driver<String> { return Driver.empty() }
-    var color:Driver<UIColor> { return Driver.empty() }
+    var content: Driver<String> {
+        return zenRequest.elements.asDriver(onErrorJustReturn: "")
+    }
+    var color:Driver<UIColor> {
+        return zenRequest.elements.map { _ in .black }.asDriver(onErrorJustReturn: .black)
+    }
 }
