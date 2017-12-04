@@ -49,6 +49,42 @@ class ZenViewModelTests: XCTestCase {
             assert(content) == "Hello, world!"
         }
     }
+    func testShowNoInternetError() {
+        mockAPI.zenEvents = [error(10, APIClient.Error.noInternet)]
+        scheduler.bind([next(0, ())], to: sut.load)
+        SharingScheduler.mock(scheduler: scheduler) {
+            let content = scheduler.record(source: sut.content)
+            scheduler.start()
+            assert(content) == "No internet connection. Try to reconnect."
+        }
+    }
+    func testShowRequestTimeoutError() {
+        mockAPI.zenEvents = [error(10, APIClient.Error.requestTimedOut)]
+        scheduler.bind([next(0, ())], to: sut.load)
+        SharingScheduler.mock(scheduler: scheduler) {
+            let content = scheduler.record(source: sut.content)
+            scheduler.start()
+            assert(content) == "Request timed out. Try again."
+        }
+    }
+    func testShowUnknownError() {
+        mockAPI.zenEvents = [error(10, APIClient.Error.unknown)]
+        scheduler.bind([next(0, ())], to: sut.load)
+        SharingScheduler.mock(scheduler: scheduler) {
+            let content = scheduler.record(source: sut.content)
+            scheduler.start()
+            assert(content) == "Something went wrong. Try again."
+        }
+    }
+    func testShowOtherError() {
+        mockAPI.zenEvents = [error(10, TestError)]
+        scheduler.bind([next(0, ())], to: sut.load)
+        SharingScheduler.mock(scheduler: scheduler) {
+            let content = scheduler.record(source: sut.content)
+            scheduler.start()
+            assert(content) == "Something went wrong. Try again."
+        }
+    }
     // MARK: color
     func testShowResultsAsBlack() {
         mockAPI.zenEvents = [next(10, "Hello, world!"), completed(10)]
@@ -57,6 +93,15 @@ class ZenViewModelTests: XCTestCase {
             let color = scheduler.record(source: sut.color)
             scheduler.start()
             assert(color) == .black
+        }
+    }
+    func testShowErrorsAsRed() {
+        mockAPI.zenEvents = [error(10, TestError)]
+        scheduler.bind([next(0, ())], to: sut.load)
+        SharingScheduler.mock(scheduler: scheduler) {
+            let color = scheduler.record(source: sut.color)
+            scheduler.start()
+            assert(color) == .red
         }
     }
     // MARK:- Mock API

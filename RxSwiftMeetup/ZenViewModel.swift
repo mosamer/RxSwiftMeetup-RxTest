@@ -21,16 +21,40 @@ class ZenViewModel: ZenViewModelType {
             api.zen()
         }
     }
-
+    
     var isLoading: Driver<Bool> { return Driver.empty() }
     var canLoad: Driver<Bool> { return Driver.empty() }
     var load: AnyObserver<Void> {
         return zenRequest.inputs.asObserver()
     }
     var content: Driver<String> {
-        return zenRequest.elements.asDriver(onErrorJustReturn: "")
+        let errorMessage: Observable<String> = zenRequest.errors.map {
+            guard case .underlyingError(let error) = $0,
+                let _error = error as? APIClient.Error else {
+                    return "Something went wrong. Try again."
+            }
+            switch _error {
+            case .noInternet:
+                return "No internet connection. Try to reconnect."
+            case .requestTimedOut:
+                return "Request timed out. Try again."
+            case .unknown:
+                return "Something went wrong. Try again."
+            }
+        }
+        return Observable
+            .merge([
+                zenRequest.elements,
+                errorMessage,
+                ])
+            .asDriver(onErrorJustReturn: "")
     }
     var color:Driver<UIColor> {
-        return zenRequest.elements.map { _ in .black }.asDriver(onErrorJustReturn: .black)
+        return Observable
+            .merge([
+                zenRequest.elements.map { _ in .black },
+                zenRequest.errors.map { _ in .red},
+                ])
+            .asDriver(onErrorJustReturn: .black)
     }
 }
