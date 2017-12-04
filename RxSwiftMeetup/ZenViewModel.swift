@@ -22,7 +22,9 @@ class ZenViewModel: ZenViewModelType {
         }
     }
     
-    var isLoading: Driver<Bool> { return Driver.empty() }
+    var isLoading: Driver<Bool> {
+        return zenRequest.executing.asDriver(onErrorJustReturn: false)
+    }
     var canLoad: Driver<Bool> { return Driver.empty() }
     var load: AnyObserver<Void> {
         return zenRequest.inputs.asObserver()

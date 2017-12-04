@@ -20,7 +20,7 @@ class ZenViewModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        scheduler = TestScheduler(initialClock: 0)
+        scheduler = TestScheduler(initialClock: 0, simulateProcessingDelay: false)
         mockAPI = MockAPIClient(scheduler)
         sut = ZenViewModel(api: mockAPI)
     }
@@ -32,6 +32,19 @@ class ZenViewModelTests: XCTestCase {
         super.tearDown()
     }
     // MARK: is loading
+    func testLoadingStateFollowsRequest() {
+        mockAPI.zenEvents = [next(10, "Hello, world!"), completed(10)]
+        scheduler.bind([next(5, ())], to: sut.load)
+        SharingScheduler.mock(scheduler: scheduler) {
+            let loading = scheduler.record(source: sut.isLoading)
+            scheduler.start()
+            XCTAssertEqual(loading.events, [
+                next(0, false),
+                next(5, true),
+                next(15, false),
+                ])
+        }
+    }
     // MARK: can load
     // MARK: load request
     func testCallAPIWhenRequested() {
@@ -117,5 +130,10 @@ class ZenViewModelTests: XCTestCase {
             zenCalled += 1
             return scheduler.createColdObservable(zenEvents).asObservable()
         }
+    }
+}
+extension Assertion {
+    func next(time: TestTime, equal: T) {
+        
     }
 }
