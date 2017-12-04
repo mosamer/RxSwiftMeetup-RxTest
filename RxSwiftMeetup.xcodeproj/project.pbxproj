@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		68A6B0488248CA701C560D8E /* Pods_RxSwiftMeetup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0C63E3EF687E13C43A39F20 /* Pods_RxSwiftMeetup.framework */; };
 		CE962BDB1FD53E6E006188D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE962BDA1FD53E6E006188D2 /* AppDelegate.swift */; };
-		CE962BDD1FD53E6E006188D2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE962BDC1FD53E6E006188D2 /* ViewController.swift */; };
 		CE962BE01FD53E6E006188D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE962BDE1FD53E6E006188D2 /* Main.storyboard */; };
 		CE962BE21FD53E6E006188D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE962BE11FD53E6E006188D2 /* Assets.xcassets */; };
 		CE962BE51FD53E6E006188D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE962BE31FD53E6E006188D2 /* LaunchScreen.storyboard */; };
 		CE962BF01FD53E6F006188D2 /* RxSwiftMeetupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE962BEF1FD53E6F006188D2 /* RxSwiftMeetupTests.swift */; };
+		CE962BFB1FD5410A006188D2 /* ZenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE962BFA1FD5410A006188D2 /* ZenViewModel.swift */; };
+		CE962BFD1FD54177006188D2 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE962BFC1FD54177006188D2 /* APIClient.swift */; };
+		CE962BFF1FD541AD006188D2 /* ZenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE962BFE1FD541AD006188D2 /* ZenViewController.swift */; };
 		F024570D9D0F803CC5B5917A /* Pods_RxSwiftMeetupTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C53B7C55966BE48BEE8DEE /* Pods_RxSwiftMeetupTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +37,6 @@
 		C1F433F894CDD2D2A42794C4 /* Pods-RxSwiftMeetup.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwiftMeetup.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxSwiftMeetup/Pods-RxSwiftMeetup.debug.xcconfig"; sourceTree = "<group>"; };
 		CE962BD71FD53E6E006188D2 /* RxSwiftMeetup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxSwiftMeetup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE962BDA1FD53E6E006188D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CE962BDC1FD53E6E006188D2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CE962BDF1FD53E6E006188D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE962BE11FD53E6E006188D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE962BE41FD53E6E006188D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -43,6 +44,9 @@
 		CE962BEB1FD53E6F006188D2 /* RxSwiftMeetupTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxSwiftMeetupTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE962BEF1FD53E6F006188D2 /* RxSwiftMeetupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSwiftMeetupTests.swift; sourceTree = "<group>"; };
 		CE962BF11FD53E6F006188D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE962BFA1FD5410A006188D2 /* ZenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenViewModel.swift; sourceTree = "<group>"; };
+		CE962BFC1FD54177006188D2 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		CE962BFE1FD541AD006188D2 /* ZenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZenViewController.swift; sourceTree = "<group>"; };
 		E1B9C6B3A456D79CB5BD64FF /* Pods-RxSwiftMeetup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwiftMeetup.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxSwiftMeetup/Pods-RxSwiftMeetup.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,7 +114,9 @@
 			isa = PBXGroup;
 			children = (
 				CE962BDA1FD53E6E006188D2 /* AppDelegate.swift */,
-				CE962BDC1FD53E6E006188D2 /* ViewController.swift */,
+				CE962BFE1FD541AD006188D2 /* ZenViewController.swift */,
+				CE962BFA1FD5410A006188D2 /* ZenViewModel.swift */,
+				CE962BFC1FD54177006188D2 /* APIClient.swift */,
 				CE962BDE1FD53E6E006188D2 /* Main.storyboard */,
 				CE962BE11FD53E6E006188D2 /* Assets.xcassets */,
 				CE962BE31FD53E6E006188D2 /* LaunchScreen.storyboard */,
@@ -336,8 +342,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE962BDD1FD53E6E006188D2 /* ViewController.swift in Sources */,
+				CE962BFB1FD5410A006188D2 /* ZenViewModel.swift in Sources */,
 				CE962BDB1FD53E6E006188D2 /* AppDelegate.swift in Sources */,
+				CE962BFF1FD541AD006188D2 /* ZenViewController.swift in Sources */,
+				CE962BFD1FD54177006188D2 /* APIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
